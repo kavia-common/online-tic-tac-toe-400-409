@@ -1,3 +1,45 @@
-<div class="container">
-  <h1>{{ title }}</h1>
+<div class="t3t-app-outer">
+  <div class="t3t-app-inner">
+    <h1 class="t3t-title" aria-label="Tic Tac Toe">{{ title }}</h1>
+    <div class="t3t-status" *ngIf="!winner && !draw">
+      <span>
+        <span class="t3t-label">Current turn:</span>
+        <span class="t3t-player" [ngClass]="currentPlayer">{{ currentPlayer }}</span>
+      </span>
+    </div>
+    <div class="t3t-status" *ngIf="winner">
+      <span class="t3t-congrats"><span class="t3t-player" [ngClass]="winner">{{ winner }}</span> wins!</span>
+    </div>
+    <div class="t3t-status" *ngIf="!winner && draw">
+      <span class="t3t-draw">It's a draw!</span>
+    </div>
+    <div class="t3t-board-wrapper">
+      <div class="t3t-board" role="grid" aria-label="3 by 3 tic tac toe board">
+        <div
+          *ngFor="let row of board; let rowIndex = index"
+          class="t3t-board-row"
+          role="row"
+        >
+          <button
+            *ngFor="let cell of row; let colIndex = index"
+            class="t3t-cell"
+            [ngClass]="{
+              X: cell === 'X',
+              O: cell === 'O',
+              clickable: !cell && !winner && !draw
+            }"
+            (click)="makeMove(rowIndex, colIndex)"
+            [attr.aria-label]="'Cell ' + (rowIndex + 1) + '-' + (colIndex + 1)"
+            [disabled]="cell || winner || draw"
+            [attr.data-last]="rowIndex === lastRowPlayed && colIndex === lastColPlayed ? 'true' : null"
+          >
+            <span *ngIf="cell" class="t3t-mark" [ngClass]="cell">{{ cell }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="t3t-action-btns">
+      <button class="t3t-restart-btn" (click)="resetGame()">Restart</button>
+    </div>
+  </div>
 </div>

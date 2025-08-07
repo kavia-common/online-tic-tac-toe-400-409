@@ -1,16 +1,220 @@
-.container {
+.t3t-app-outer {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
 }
 
-h1 {
+.t3t-app-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 18px rgba(25,118,210,.05), 0 1.5px 3px rgba(66,66,66,.10);
+  background: #fff;
+  min-width: 320px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.t3t-title {
   color: #1976d2;
-  font-size: 3rem;
-  font-weight: 500;
-  margin: 0;
+  font-size: 2.3rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
   text-align: center;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.t3t-status, .t3t-congrats, .t3t-draw {
+  margin-bottom: 18px;
+  font-size: 1.12rem;
+  text-align: center;
+  color: #424242;
+}
+
+.t3t-status {
+  font-weight: 450;
+}
+
+.t3t-congrats {
+  color: #f44336;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+}
+
+.t3t-draw {
+  color: #1976d2;
+  font-size: 1.14rem;
+  font-weight: 500;
+}
+
+.t3t-label {
+  color: #1976d2;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-right: 0.33em;
+}
+
+.t3t-player.X {
+  color: #f44336;
+  font-weight: 700;
+  font-size: 1.15em;
+}
+
+.t3t-player.O {
+  color: #1976d2;
+  font-weight: 700;
+  font-size: 1.15em;
+}
+
+/* Board grid styles */
+.t3t-board-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.t3t-board {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.25rem;
+  background: #f5f5f6;
+  border-radius: 1rem;
+  box-shadow: 0 2px 5px rgba(25,118,210,0.02);
+  padding: 0.8rem;
+}
+
+.t3t-board-row {
+  display: flex;
+}
+
+.t3t-cell {
+  width: 72px;
+  height: 72px;
+  margin: 0.2rem;
+  background: #fff;
+  border: 2.2px solid #1976d2;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #424242;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 
+    color 0.14s,
+    background 0.14s,
+    border-color 0.15s,
+    box-shadow 0.18s;
+  outline: none;
+  position: relative;
+}
+
+.t3t-cell[data-last="true"] {
+  outline: 3px solid #f44336;
+  z-index: 2;
+}
+
+.t3t-cell.X {
+  color: #f44336;
+}
+
+.t3t-cell.O {
+  color: #1976d2;
+}
+
+.t3t-cell:disabled {
+  color: #8d8d8f;
+  background: #f9f9fa;
+  cursor: default;
+  border-color: #cfd8dc;
+}
+
+.t3t-cell.clickable:hover,
+.t3t-cell.clickable:focus-visible {
+  background: #e3f2fd;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px #1976d260;
+}
+
+/* X and O mark styling */
+.t3t-mark {
+  font-size: 2.25em;
+  font-weight: 900;
+  display: block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.t3t-mark.X {
+  color: #f44336;
+  text-shadow: 0 1.5px 0 #f4433625;
+}
+
+.t3t-mark.O {
+  color: #1976d2;
+  text-shadow: 0 1.5px 0 #1976d216;
+}
+
+/* Action/restart button styles */
+.t3t-action-btns {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.t3t-restart-btn {
+  background: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.85em;
+  padding: 0.8em 2.3em;
+  cursor: pointer;
+  box-shadow: 0 2px 6px #1976d219;
+  margin-top: 0.3em;
+  margin-bottom: 0.4em;
+  transition: background .14s, box-shadow .17s;
+}
+.t3t-restart-btn:hover,
+.t3t-restart-btn:focus-visible {
+  background: #1565c0;
+  box-shadow: 0 4px 12px #1976d242;
+}
+
+/* Responsive: mobile UI optimization */
+@media (max-width: 600px) {
+  .t3t-app-inner {
+    min-width: 0;
+    max-width: 96vw;
+    box-shadow: 0 1px 7px rgba(66,66,66,.07);
+    padding: 1.2rem 0.5rem 2rem 0.5rem;
+    border-radius: 0.8rem;
+  }
+  .t3t-title {
+    font-size: 1.42rem;
+  }
+  .t3t-board {
+    padding: 0.3rem;
+    grid-gap: 0.12rem;
+  }
+  .t3t-cell {
+    width: 48px;
+    height: 48px;
+    font-size: 1.39rem;
+  }
+  .t3t-mark {
+    font-size: 1.42em;
+  }
+  .t3t-status, .t3t-label {
+    font-size: 0.9rem;
+  }
 }
